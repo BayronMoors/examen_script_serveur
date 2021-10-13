@@ -28,16 +28,35 @@ RewriteEngine on
 # URL: index.php?post=show&postID=$1&postTitle=$2
 # ACTION: showAction()
 # TITLE: Alex PArker - title du post
-RewriteRule ^post\/([1-9][0-9]*)\/([a-z][a-z\-]*).html$ index.php?post=show&postID=$1&postTitle=$2 [L]
+RewriteRule ^posts\/([1-9][0-9]*)\/([a-z][a-z\-0-9]*).html$ index.php?post=show&postID=$1&postTitle=$2 [L]
 
 # ROUTE D'AJOUT D'UN POST: affichage du formulaire
 # PATTERN: /posts/add/form.html
 # CTRL: index.php?post=added
 # ACTION: addedAction()
 # TITLE: Alex Parker - Add a post
-RewriteRule ^post\/add\/form.html$ index.php?post=added [L]
+RewriteRule ^posts\/add\/form.html$ index.php?post=added [L]
 
+# ROUTE D'AJOUT D'UN POST: INSERT
+# PATTERN: /posts/add/insert.html
+# CTRL: index.php?post=store
+# ACTION: storeAction()
+# PAS DE TITLE CAR REDIRECTION VERS LA PAGE D'ACCUEIL
+RewriteRule ^posts\/add\/insert.html$ index.php?post=store [L]
 
+# ROUTE DE MODIFICATION D'UN POST: Affichage du formulaire
+# PATTERN: /posts/id/slug-du-post/edit/form.html
+# CTRL: index.php?post=edit&postID=$1
+# ACTION: editAction()
+# TITLE: Alex Parker - Edit a post
+RewriteRule ^posts\/([1-9][0-9]*)\/[a-z][a-z\-0-9]*\/edit\/form.html$ index.php?post=edit&postID=$1 [L]
+
+# ROUTE DE MODIFICATION D'UN POST: UPDATE
+# PATTERN: /posts/id/slug-du-post/edit/update.html
+# CTRL: index.php?post=update&postID=$1
+# ACTION: updateAction()
+# PAS DE TITLE CAR REDIRECTION VERS LA PAGE DE DETAILS DU POST
+RewriteRule ^posts\/([1-9][0-9]*)\/[a-z][a-z\-0-9]*\/edit\/update.html$ index.php?post=update&postID=$1 [L]
 
 
 # ROUTE DE SUPPRESSION D'UN POST:
@@ -45,14 +64,14 @@ RewriteRule ^post\/add\/form.html$ index.php?post=added [L]
 # CTRL: index.php?post=delete&postID=$1
 # ACTION: deleteAction()
 # PAS DE TITLE CAR REDIRECTION VERS LA PAGE D'ACCUEIL
-RewriteRule ^post\/([1-9][0-9]*)\/([a-z][a-z\-]*)\/delete.html$ index.php?post=delete&postID=$1 [L]
+RewriteRule ^posts\/([1-9][0-9]*)\/[a-z][a-z\-0-9]*\/delete.html$ index.php?post=delete&postID=$1 [L]
 
 # ROUTE DU DETAILS DES POSTS PAR CATEGORIE
 # PATTERN: /categorie/id/name.html
 # URL: index.php?categorie=list&categorieID=$1&categorieTitle=$2
 # ACTION: slistAction()
 # TITLE: Alex PArker - nom de la categorie
-RewriteRule ^categorie\/([1-9][0-9]*)\/([a-z][a-z\-]*).html$ index.php?categorie=list&categorieID=$1&categorieTitle=$2 [L]
+RewriteRule ^categories\/([1-9][0-9]*)\/([a-z][a-z\-]*).html$ index.php?categorie=list&categorieID=$1&categorieTitle=$2 [L]
 
 # --------------------------------------------------
 RewriteCond %{REQUEST_URI} !\.(js|css|jpg|gif|zip|png|pdf)$ [NC]

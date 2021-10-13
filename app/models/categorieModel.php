@@ -51,7 +51,8 @@ function findAll(\PDO $conn):array{
 function findPostByCategorieId(\PDO $conn, array $data):array{
     $sql = "SELECT *
             FROM posts p
-            where p.category_id = :id;";
+            where p.category_id = :id
+            ORDER BY created_at DESC;";
     $rs = $conn->prepare($sql);
     $rs->bindValue(":id", $data['id'], \PDO::PARAM_INT);
     $rs->execute();

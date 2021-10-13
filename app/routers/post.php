@@ -24,4 +24,37 @@ switch ($_GET['post']) {
         include_once "../app/controllers/postController.php";
         PostController\addedAction($conn);
         break;
+    case "store":
+        if(uploadFile("image", "./images/blog/")){
+            include_once "../app/controllers/postController.php";
+            PostController\storeAction($conn, [
+                "title" => $_POST['title'],
+                "text" => $_POST['text'],
+                "image" => $_FILES['image']['name'],
+                "quote" => $_POST['quote'],
+                "category_id" => $_POST['category_id'] 
+            ]);
+        }
+        break;
+    case "edit":
+        include_once "../app/controllers/postController.php";
+        PostController\editAction($conn, $_GET['postID']);
+        break;
+    case "update":
+        if(uploadFile("image", "./images/blog/")){
+            include_once "../app/controllers/postController.php";
+            PostController\updateAction($conn, [
+                "id" => $_GET['postID'],
+                "title" => $_POST['title'],
+                "text" => $_POST['text'],
+                "image" => $_FILES['image']['name'],
+                "quote" => $_POST['quote'],
+                "category_id" => $_POST['category_id'] 
+            ]);
+        }
+        break;
+    case "delete":
+        include_once "../app/controllers/postController.php";
+        PostController\deleteAction($conn, $_GET['postID']);
+        break;
 }

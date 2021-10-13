@@ -78,7 +78,7 @@
                 <?php include_once "../app/models/categorieModel.php";
                         $categories = App\Models\CategorieModel\findAll($conn)?>
                   <?php foreach ($categories as $categorie): ?>
-                  <li><a href="categorie/<?php echo $categorie['id']; ?>/<?php echo slugify($categorie['name']); ?>.html"><?php echo $categorie['name']; ?> [<?php echo $categorie['Nbpost']; ?>]</a></li>
+                  <li><a href="categories/<?php echo $categorie['id']; ?>/<?php echo slugify($categorie['name']); ?>.html"><?php echo $categorie['name']; ?> [<?php echo $categorie['Nbpost']; ?>]</a></li>
                   <?php endforeach; ?>
                 </ul>
               </div>
