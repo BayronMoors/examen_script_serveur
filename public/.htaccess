@@ -1,0 +1,60 @@
+#--------------------------------------------------
+# Répertoire : /
+#--------------------------------------------------
+
+# Le serveur doit suivre les liens symboliques :
+Options +FollowSymlinks
+
+# Activation du module de réécriture d'URL :
+RewriteEngine on
+
+#--------------------------------------------------
+# ROUTES
+#--------------------------------------------------
+
+
+#--------------------------------------------------
+# POST
+#--------------------------------------------------
+
+# ROUTE PAR DEFAUT: list des posts
+# PATTERN: /
+# URL: index.php?post=index
+# ACTION: indexAction()
+# TITLE: Alex PArker - Blog
+
+# ROUTE DU DETAILS D'UN POST
+# PATTERN: /post/id/slug-du-post.html
+# URL: index.php?post=show&postID=$1&postTitle=$2
+# ACTION: showAction()
+# TITLE: Alex PArker - title du post
+RewriteRule ^post\/([1-9][0-9]*)\/([a-z][a-z\-]*).html$ index.php?post=show&postID=$1&postTitle=$2 [L]
+
+# ROUTE D'AJOUT D'UN POST: affichage du formulaire
+# PATTERN: /posts/add/form.html
+# CTRL: index.php?post=added
+# ACTION: addedAction()
+# TITLE: Alex Parker - Add a post
+RewriteRule ^post\/add\/form.html$ index.php?post=added [L]
+
+
+
+
+# ROUTE DE SUPPRESSION D'UN POST:
+# PATTERN: /posts/id/slug-du-post/delete.html
+# CTRL: index.php?post=delete&postID=$1
+# ACTION: deleteAction()
+# PAS DE TITLE CAR REDIRECTION VERS LA PAGE D'ACCUEIL
+RewriteRule ^post\/([1-9][0-9]*)\/([a-z][a-z\-]*)\/delete.html$ index.php?post=delete&postID=$1 [L]
+
+# ROUTE DU DETAILS DES POSTS PAR CATEGORIE
+# PATTERN: /categorie/id/name.html
+# URL: index.php?categorie=list&categorieID=$1&categorieTitle=$2
+# ACTION: slistAction()
+# TITLE: Alex PArker - nom de la categorie
+RewriteRule ^categorie\/([1-9][0-9]*)\/([a-z][a-z\-]*).html$ index.php?categorie=list&categorieID=$1&categorieTitle=$2 [L]
+
+# --------------------------------------------------
+RewriteCond %{REQUEST_URI} !\.(js|css|jpg|gif|zip|png|pdf)$ [NC]
+RewriteRule ^index.html$ index.php?post=index [L]
+RewriteRule ^$ index.php?post=index [L]
