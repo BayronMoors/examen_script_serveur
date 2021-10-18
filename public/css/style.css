@@ -611,7 +611,6 @@ tr > td:nth-child(2) {
 /* Blog Post & Single Blog Page */
 
 div.blog-post {
-    display: none;
     margin-bottom: 50px;
 }
 

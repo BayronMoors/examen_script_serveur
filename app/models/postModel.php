@@ -12,12 +12,15 @@
   * @param \PDO $conn
   * @return array
   */
- function findAll(\PDO $conn):array{
+ function findAll(\PDO $conn, int $off):array{
      $sql="SELECT *
            FROM posts
            ORDER BY created_at DESC
-           LIMIT 10;";
-     $rs = $conn->query($sql);
+           LIMIT 10 OFFSET :off;";
+     $countOffSet = ($off * 10) - 10;
+     $rs = $conn->prepare($sql);
+     $rs->bindValue(":off", $countOffSet, \PDO::PARAM_INT);
+     $rs->execute();
      return $rs->fetchAll(\PDO::FETCH_ASSOC);
  }
 
@@ -94,3 +97,16 @@
       $rs->bindValue(":id", $data['id'], \PDO::PARAM_INT);
       $rs->execute();
 }
+
+/**
+ * countAllPost function
+ *
+ * @param \PDO $conn
+ * @return array
+ */
+function countAllPost(\PDO $conn): array{
+      $sql = "SELECT count(posts.id) as count
+              FROM posts;";
+      $rs = $conn->query($sql);
+      return $rs->fetch(\PDO::FETCH_ASSOC);
+  }

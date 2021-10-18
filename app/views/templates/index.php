@@ -9,47 +9,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Meta Tag -->
-    <base href="<?php echo BASE_URL; ?>">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-    <!-- SEO -->
-    <meta name="description" content="150 words" />
-    <meta name="author" content="uipasta" />
-    <meta name="url" content="http://www.yourdomainname.com" />
-    <meta name="copyright" content="company name" />
-    <meta name="robots" content="index,follow" />
-
-    <title>Alex Parker - <?php echo $title; ?></title>
-
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="images/favicon/favicon.ico" />
-    <link
-      rel="apple-touch-icon"
-      sizes="144x144"
-      type="image/x-icon"
-      href="images/favicon/apple-touch-icon.png"
-    />
-
-    <!-- All CSS Plugins -->
-    <link rel="stylesheet" type="text/css" href="css/plugin.css" />
-
-    <!-- Main CSS Stylesheet -->
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-
-    <!-- Google Web Fonts  -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Poppins:400,300,500,600,700"
-    />
-
-    <!-- HTML5 shiv and Respond.js support IE8 or Older for HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+   <?php  include_once "../app/views/templates/partials/_head.php";?>
   </head>
 
   <body>
@@ -63,57 +23,7 @@
       <div class="container">
         <div class="row">
           <!-- About Me (Left Sidebar) Start -->
-          <div class="col-md-3">
-            <div class="about-fixed">
-              <div class="my-pic">
-                <a href="index.html"
-                  ><img src="images/pic/my-pic.png" alt=""
-                /></a>
-                <nav id="menu">
-                  <ul class="menu-link">
-                    <li><a href="index.html">My blog</a></li>
-                  </ul>
-                </nav>
-                <ul class="menu-link">
-                <?php include_once "../app/models/categorieModel.php";
-                        $categories = App\Models\CategorieModel\findAll($conn)?>
-                  <?php foreach ($categories as $categorie): ?>
-                  <li><a href="categories/<?php echo $categorie['id']; ?>/<?php echo slugify($categorie['name']); ?>.html"><?php echo $categorie['name']; ?> [<?php echo $categorie['Nbpost']; ?>]</a></li>
-                  <?php endforeach; ?>
-                </ul>
-              </div>
-
-              <div class="my-detail">
-                <div class="white-spacing">
-                  <h1>Alex Parker</h1>
-                  <span>Web Developer</span>
-                </div>
-
-                <ul class="social-icon">
-                  <li>
-                    <a href="#" target="_blank" class="facebook"
-                      ><i class="fa fa-facebook"></i
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#" target="_blank" class="twitter"
-                      ><i class="fa fa-twitter"></i
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#" target="_blank" class="linkedin"
-                      ><i class="fa fa-linkedin"></i
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#" target="_blank" class="github"
-                      ><i class="fa fa-github"></i
-                    ></a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <?php include_once "../app/views/templates/partials/_side.php"; ?>
           <!-- About Me (Left Sidebar) End -->
 
           <!-- Blog Post (Right Sidebar) Start -->
@@ -121,22 +31,7 @@
           <?php echo $content; ?>
 
             <!-- Footer Start -->
-            <div class="col-md-12 page-body margin-top-50 footer">
-              <footer>
-                <ul class="menu-link">
-                  <li><a href="index.html">My Blog</a></li>
-                </ul>
-
-                <p>© Copyright 2016 DevBlog. All rights reserved</p>
-
-                <!-- UiPasta Credit Start -->
-                <div class="uipasta-credit">
-                  Design By
-                  <a href="http://www.uipasta.com" target="_blank">UiPasta</a>
-                </div>
-                <!-- UiPasta Credit End -->
-              </footer>
-            </div>
+            <?php include_once "../app/views/templates/partials/_footer.php"; ?>
             <!-- Footer End -->
           </div>
           <!-- Blog Post (Right Sidebar) End -->
@@ -147,12 +42,9 @@
     <!-- Back to Top Start -->
     <a href="#" class="scroll-to-top"><i class="fa fa-long-arrow-up"></i></a>
     <!-- Back to Top End -->
+    <?php include_once "../app/views/templates/partials/_script.php"; ?>
 
     <!-- All Javascript Plugins  -->
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/plugin.js"></script>
 
-    <!-- Main Javascript File  -->
-    <script type="text/javascript" src="js/scripts.js"></script>
   </body>
 </html>

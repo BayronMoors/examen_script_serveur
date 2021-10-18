@@ -58,3 +58,4 @@ function findPostByCategorieId(\PDO $conn, array $data):array{
     $rs->execute();
     return $rs->fetchAll(\PDO::FETCH_ASSOC);
 }
+

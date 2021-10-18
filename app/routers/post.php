@@ -25,36 +25,58 @@ switch ($_GET['post']) {
         PostController\addedAction($conn);
         break;
     case "store":
-        if(uploadFile("image", "./images/blog/")){
-            include_once "../app/controllers/postController.php";
-            PostController\storeAction($conn, [
-                "title" => $_POST['title'],
-                "text" => $_POST['text'],
-                "image" => $_FILES['image']['name'],
-                "quote" => $_POST['quote'],
-                "category_id" => $_POST['category_id'] 
-            ]);
+        if(strlen($_FILES['image']["name"]) > 0){
+            uploadFile("image", "./images/blog/");
+            $image = $_FILES['image']["name"];
         }
+        else{
+            $image = "1.jpg";
+        }
+        include_once "../app/controllers/postController.php";
+        PostController\storeAction($conn, [
+            "title" => $_POST['title'],
+            "text" => $_POST['text'],
+            "image" => $image,
+            "quote" => $_POST['quote'],
+            "category_id" => $_POST['category_id']
+        ]);
         break;
     case "edit":
         include_once "../app/controllers/postController.php";
         PostController\editAction($conn, $_GET['postID']);
         break;
     case "update":
-        if(uploadFile("image", "./images/blog/")){
+        if(strlen($_FILES['image']["name"]) > 0){
+            uploadFile("image", "./images/blog/");
+            $image = $_FILES['image']["name"];
+        }
+        else{
+            $image = $_POST['imageName'];
+        }
             include_once "../app/controllers/postController.php";
             PostController\updateAction($conn, [
                 "id" => $_GET['postID'],
                 "title" => $_POST['title'],
                 "text" => $_POST['text'],
-                "image" => $_FILES['image']['name'],
+                "image" => $image,
                 "quote" => $_POST['quote'],
-                "category_id" => $_POST['category_id'] 
+                "category_id" => $_POST['category_id']
             ]);
-        }
         break;
     case "delete":
         include_once "../app/controllers/postController.php";
         PostController\deleteAction($conn, $_GET['postID']);
+        break;
+    case "pagination":
+        include_once "../app/controllers/postController.php";
+        PostController\indexAction($conn, $_GET['postID']);
+        break;
+    case "previous":
+            include_once "../app/controllers/postController.php";
+            PostController\indexAction($conn, $_GET['postID']);
+            break;
+    case "next":
+            include_once "../app/controllers/postController.php";
+            PostController\indexAction($conn, $_GET['postID']);
         break;
 }

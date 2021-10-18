@@ -28,24 +28,28 @@
                     <form action="posts/<?php echo $post['id']; ?>/<?php echo slugify($post['title']); ?>/edit/update.html" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="title">Title</label>
-                            <input type="text" name="title" id="title" class="form-control" placeholder="Enter your title here" value="<?php echo $post['title']; ?>"/>
+                            <input type="text" name="title" id="title" class="form-control" placeholder="Enter your title here" value="<?php echo $post['title']; ?>" required/>
                         </div>
                         <div class="form-group">
                             <label for="text">Text</label>
-                            <textarea id="text" name="text" class="form-control" rows="5" placeholder="Enter your text here"><?php echo $post['text']; ?></textarea>
+                            <textarea id="text" name="text" class="form-control" rows="5" placeholder="Enter your text here" required><?php echo $post['text']; ?></textarea>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlFile1"> Image</label>
                             <input type="file" name="image" class="form-control-file btn btn-primary" id="exampleFormControlFile1">
                         </div>
                         <div class="form-group">
+                            <label for="exampleFormControlFile1"> Image</label>
+                            <input type="hidden" name="imageName" class="form-control-file btn btn-primary" id="exampleFormControlFile1" value="<?php echo $post['image']; ?>">
+                        </div>
+                        <div class="form-group">
                             <label for="quote">Quote</label>
-                            <textarea id="quote" name="quote" class="form-control" rows="5" placeholder="Enter your quote here"><?php echo $post['quote']; ?></textarea>
+                            <textarea id="quote" name="quote" class="form-control" rows="5" placeholder="Enter your quote here" required><?php echo $post['quote']; ?></textarea>
                         </div>
                         <div class="form-group">
                             <label for="text">Category</label>
-                            <select id="category" name="category_id" class="form-control">
-                                <option disabled>
+                            <select id="category" name="category_id" class="form-control" required>
+                                <option value="" disabled>
                                     Select your category
                                 </option>
                                 <?php include_once "../app/models/categorieModel.php";

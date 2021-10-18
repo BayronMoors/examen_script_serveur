@@ -66,6 +66,29 @@ RewriteRule ^posts\/([1-9][0-9]*)\/[a-z][a-z\-0-9]*\/edit\/update.html$ index.ph
 # PAS DE TITLE CAR REDIRECTION VERS LA PAGE D'ACCUEIL
 RewriteRule ^posts\/([1-9][0-9]*)\/[a-z][a-z\-0-9]*\/delete.html$ index.php?post=delete&postID=$1 [L]
 
+# ROUTE DE LA PAGINATION DES POSTS:
+# PATTERN: /index/$1/posts.html
+# CTRL: index.php?post=pagination&postID=$1
+# ACTION: indexAction()
+#  Alex PArker - Blog
+RewriteRule ^index\/([1-9][0-9]*)\/posts.html$ index.php?post=pagination&postID=$1 [L]
+
+# ROUTE DU PREVIOUS DE LA PAGINATION:
+# PATTERN: /index/previous/$1/posts.html
+# CTRL: index.php?post=previous&postID=$1
+# ACTION: indexAction()
+#  Alex PArker - Blog
+RewriteRule ^index\/previous\/([1-9][0-9]*)\/posts.html$ index.php?post=previous&postID=$1 [L]
+
+# ROUTE DU NEXT DE LA PAGINATION:
+# PATTERN: /index/next/$1/posts.html
+# CTRL: index.php?post=next&postID=$1
+# ACTION: indexAction()
+#  Alex PArker - Blog
+RewriteRule ^index\/next\/([1-9][0-9]*)\/posts.html$ index.php?post=next&postID=$1 [L]
+
+
+
 # ROUTE DU DETAILS DES POSTS PAR CATEGORIE
 # PATTERN: /categorie/id/name.html
 # URL: index.php?categorie=list&categorieID=$1&categorieTitle=$2

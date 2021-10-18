@@ -16,12 +16,13 @@ use App\Models\PostModel;
  * @param \PDO $conn
  * @return void
  */
-function indexAction(\PDO $conn)
+function indexAction(\PDO $conn, int $off = 1)
 {
     include_once "../app/models/postModel.php";
-    $posts = PostModel\findAll($conn);
+    $posts = PostModel\findAll($conn, $off);
 
-    global $content, $title;
+    global $content, $title, $offset;
+    $offset = $off * 10;
     $title = "Blog";
     ob_start();
     include "../app/views/posts/index.php";
